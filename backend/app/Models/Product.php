@@ -9,20 +9,23 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-
     public function getRouteKeyName()
     {
         return 'slug';
     }
-
-    public function category()
+    
+    public function tag()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Tag::class);
     }
 
-    public function tags()
+    public function carts()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->hasMany(Cart::class);
+    }
+
+    public function purchasedBy()
+    {
+        return $this->belongsToMany(User::class, 'purchased_products', 'product_id', 'user_id')->withTimestamps();
     }
 }

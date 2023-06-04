@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tag_id')->constrained();
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('picture')->nullable();
+            $table->double('price');
+            $table->text('description');
             $table->timestamps();
-        });
-
-        Schema::create('product_tag', function (Blueprint $table) {
-            $table->foreignId('product_id');
-            $table->foreignId('tag_id');
-
-            $table->primary(['product_id', 'tag_id']);
         });
     }
 
@@ -31,7 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
-        Schema::dropIfExists('product_tag');
+        Schema::dropIfExists('products');
     }
 };

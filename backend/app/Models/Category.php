@@ -14,13 +14,13 @@ class Category extends Model
         return 'slug';
     }
     
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
-
     public function tags()
     {
         return $this->hasMany(Tag::class);
+    }
+
+    public function products()
+    {
+        return $this->hasManyThrough(Product::class, Tag::class);
     }
 }

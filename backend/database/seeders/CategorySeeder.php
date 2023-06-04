@@ -14,10 +14,10 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         collect([
-            ['name' => $name = 'Clothing', 'slug' => str($name)->slug()],
-            ['name' => $name = 'Shoes', 'slug' => str($name)->slug()],
-            ['name' => $name = 'Bags', 'slug' => str($name)->slug()],
-            ['name' => $name = 'Accessories', 'slug' => str($name)->slug()],
+            ['name' => $name = 'Clothing', 'slug' => str($name)->slug],
+            ['name' => $name = 'Shoes', 'slug' => str($name)->slug],
+            ['name' => $name = 'Bags', 'slug' => str($name)->slug],
+            ['name' => $name = 'Accessories', 'slug' => str($name)->slug],
         ])->each(fn ($category) => Category::create($category));
     }
 }

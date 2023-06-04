@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ProductResouce;
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductSingleResource;
 use App\Models\Product;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,15 +12,15 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::query()
-            ->with('category')
-            ->select('id', 'name', 'slug', 'picture', 'price', 'category_id')
-            ->paginate(15);
-        
-        return ProductResouce::collection($products);
+            ->with('tag.category')
+            ->select('id', 'name', 'slug', 'picture', 'price', 'tag_id')
+            ->paginate(24);
+
+        return ProductResource::collection($products);
     }
 
     public function show(Product $product)
     {
-        return $product;
+        return new ProductSingleResource($product);
     }
 }
